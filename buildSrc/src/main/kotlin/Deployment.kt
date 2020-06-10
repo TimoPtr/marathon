@@ -42,8 +42,8 @@ object Deployment {
             else -> Deployment.snapshotDeployUrl
         }
 
-        initializePublishing(project)
-        initializeSigning(project)
+        //initializePublishing(project)
+        //initializeSigning(project)
     }
 
     private fun initializePublishing(project: Project) {

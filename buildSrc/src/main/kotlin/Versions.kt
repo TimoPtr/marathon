@@ -49,6 +49,7 @@ object Versions {
     val jsonAssert = "1.5.0"
     val xmlUnit ="2.6.3"
     val assertk = "0.19"
+    val kolibreePublisher = "1.0.5"
 }
 
 object BuildPlugins {
@@ -56,6 +57,7 @@ object BuildPlugins {
     val junitGradle = "org.junit.platform:junit-platform-gradle-plugin:${Versions.junitGradle}"
     val androidGradle = "com.android.tools.build:gradle:${Versions.androidGradleVersion}"
     val dokka = "org.jetbrains.dokka:dokka-gradle-plugin:${Versions.dokka}"
+    val kolibreePublisher = "com.kolibree.gradle:kolibree-publisher:${Versions.kolibreePublisher}"
 }
 
 object Libraries {
