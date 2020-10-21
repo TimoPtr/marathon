@@ -6,6 +6,7 @@ import com.android.build.gradle.LibraryExtension
 import com.android.build.gradle.LibraryPlugin
 import com.android.build.gradle.api.BaseVariantOutput
 import com.android.build.gradle.api.TestVariant
+import com.android.build.gradle.internal.tasks.factory.dependsOn
 import com.malinskiy.marathon.config.AppType
 import com.malinskiy.marathon.exceptions.BugsnagExceptionsReporter
 import com.malinskiy.marathon.exceptions.ExceptionsReporter
@@ -90,7 +91,9 @@ class MarathonPlugin : Plugin<Project> {
                     exceptionsTracker = exceptionsReporter
                     executeGradleCompat(
                         exec = {
-                            dependsOn(variant.testedVariant.assembleProvider, variant.assembleProvider)
+                            // WIP validate this
+                            variant.testedVariant.assembleProvider.dependsOn(variant.assembleProvider)
+                            dependsOn(variant.testedVariant.assembleProvider)
                         },
                         fallbacks = listOf {
                             @Suppress("DEPRECATION")

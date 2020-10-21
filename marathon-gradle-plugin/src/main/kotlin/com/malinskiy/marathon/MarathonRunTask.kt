@@ -11,6 +11,7 @@ import com.malinskiy.marathon.android.serial.SerialStrategy
 import com.malinskiy.marathon.di.marathonStartKoin
 import com.malinskiy.marathon.exceptions.ExceptionsReporter
 import com.malinskiy.marathon.execution.Configuration
+import com.malinskiy.marathon.extensions.executeGradleCompat
 import com.malinskiy.marathon.extensions.extractApplication
 import com.malinskiy.marathon.extensions.extractTestApplication
 import com.malinskiy.marathon.log.MarathonLogging
@@ -43,11 +44,11 @@ open class MarathonRunTask : DefaultTask(), VerificationTask {
 
     @TaskAction
     fun runMarathon() {
+        log.error { "Start marathon " }
         val instrumentationApk = testVariant.extractTestApplication()
         val applicationApk = applicationVariant.extractApplication()
 
-        val baseOutputDir =
-            if (extensionConfig.baseOutputDir != null) File(extensionConfig.baseOutputDir) else File(project.buildDir, "reports/marathon")
+        val baseOutputDir =extensionConfig.baseOutputDir?.let{File(it)} ?: File(project.buildDir, "reports/marathon")
         val output = File(baseOutputDir, flavorName)
 
         val vendorConfiguration = createAndroidConfiguration(extensionConfig, applicationApk, instrumentationApk)

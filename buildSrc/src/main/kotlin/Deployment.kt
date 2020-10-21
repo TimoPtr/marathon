@@ -11,6 +11,7 @@ import org.gradle.kotlin.dsl.getValue
 import org.gradle.kotlin.dsl.provideDelegate
 import org.gradle.kotlin.dsl.the
 import org.gradle.plugins.signing.SigningExtension
+import java.lang.IllegalStateException
 import java.net.URI
 
 object Deployment {
@@ -32,7 +33,7 @@ object Deployment {
         val releaseMode: String? by project
         val versionSuffix = when (releaseMode) {
             "RELEASE" -> ""
-            else -> "-SNAPSHOT"
+            else -> ""
         }
 
         Deployment.releaseMode = releaseMode
@@ -42,7 +43,7 @@ object Deployment {
             else -> Deployment.snapshotDeployUrl
         }
 
-        //initializePublishing(project)
+        initializePublishing(project)
         //initializeSigning(project)
     }
 
@@ -76,22 +77,6 @@ object Deployment {
                 maven {
                     name = "Local"
                     setUrl("${project.rootDir}/build/repository")
-                }
-                maven {
-                    name = "OSSHR"
-                    credentials {
-                        username = Deployment.user
-                        password = Deployment.password
-                    }
-                    url = URI.create(Deployment.deployUrl)
-                }
-                maven {
-                    name = "GitHub"
-                    credentials {
-                        username = Deployment.githubUser
-                        password = Deployment.githubPassword
-                    }
-                    url = URI.create(Deployment.githubDeployUrl)
                 }
             }
         }

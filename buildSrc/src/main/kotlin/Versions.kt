@@ -1,11 +1,11 @@
 object Versions {
-    val marathon = System.getenv("DEPLOY_VERSION_OVERRIDE") ?: "0.5.3-kolibree"
+    val marathon = System.getenv("DEPLOY_VERSION_OVERRIDE") ?: "0.50.4-kolibree"
 
-    val kotlin = "1.3.61"
+    val kotlin = "1.4.10"
     val coroutines = "1.3.1"
 
-    val ddmlib = "27.0.0"
-    val dexTestParser = "2.1.1"
+    val ddmlib = "27.1.0"
+    val dexTestParser = "2.2.1"
     val kotlinLogging = "1.4.9"
     val slf4jAPI = "1.0.0"
     val logbackClassic = "1.2.3"
@@ -13,15 +13,14 @@ object Versions {
     val bugsnag = "3.6.1"
 
     val junitGradle = "1.0.0"
-    val androidGradleVersion = "4.0.0"
+    val androidGradleVersion = "4.1.0"
 
     val junit5 = "5.6.0"
     val kluent = "1.40"
 
     val kakao = "1.4.0"
-    val espresso = "3.0.1"
-    val espressoRules = "1.0.1"
-    val espressoRunner = "1.0.1"
+    val espresso = "3.3.0"
+    val espressoRunner = "1.3.0"
     val junit = "4.12"
     val gson = "2.8.5"
     val apacheCommonsText = "1.3"
@@ -48,7 +47,6 @@ object Versions {
     val koin = "2.0.1"
     val jsonAssert = "1.5.0"
     val xmlUnit ="2.6.3"
-    val assertk = "0.19"
     val kolibreePublisher = "1.0.5"
 }
 
@@ -65,7 +63,6 @@ object Libraries {
     val androidCommon = "com.android.tools:common:${Versions.ddmlib}"
     val dexTestParser = "com.linkedin.dextestparser:parser:${Versions.dexTestParser}"
     val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
-    val kotlinStdLibCommon = "org.jetbrains.kotlin:kotlin-stdlib-common:${Versions.kotlin}"
     val kotlinReflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
     val kotlinLogging = "io.github.microutils:kotlin-logging:${Versions.kotlinLogging}"
     val slf4jAPI = "ch.frankel.log4k:slf4k-api:${Versions.slf4jAPI}"
@@ -99,19 +96,14 @@ object TestLibraries {
     val kluent = "org.amshove.kluent:kluent:${Versions.kluent}"
     val kakao = "com.agoda.kakao:kakao:${Versions.kakao}"
 
-    val espressoRunner = "com.android.support.test:runner:${Versions.espressoRunner}"
-    val espressoRules = "com.android.support.test:rules:${Versions.espressoRules}"
-    val espressoCore = "com.android.support.test.espresso:espresso-core:${Versions.espresso}"
-    val espressoWeb = "com.android.support.test.espresso:espresso-web:${Versions.espresso}"
-    val espressoContrib = "com.android.support.test.espresso:espresso-contrib:${Versions.espresso}"
-    val espressoIntents = "com.android.support.test.espresso:espresso-intents:${Versions.espresso}"
+    val espressoRunner = "androidx.test:runner:${Versions.espressoRunner}"
+    val espressoCore = "androidx.test.espresso:espresso-core:${Versions.espresso}"
     val junit = "junit:junit:${Versions.junit}"
     val mockitoKotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:${Versions.mockitoKotlin}"
     val jupiterEngine = "org.junit.jupiter:junit-jupiter-engine:${Versions.jupiterEngine}"
     val koin = "org.koin:koin-test:${Versions.koin}"
     val jsonAssert = "org.skyscreamer:jsonassert:${Versions.jsonAssert}"
     val xmlUnit = "org.xmlunit:xmlunit-matchers:${Versions.xmlUnit}"
-    val assertk = "com.willowtreeapps.assertk:assertk:${Versions.assertk}"
 
     val testContainers = "org.testcontainers:testcontainers:${Versions.testContainers}"
     val testContainersInflux = "org.testcontainers:influxdb:${Versions.testContainers}"

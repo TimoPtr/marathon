@@ -8,19 +8,15 @@ import com.android.build.gradle.tasks.PackageAndroidArtifact
 import org.apache.tools.ant.taskdefs.Zip
 import org.gradle.api.GradleException
 import java.io.File
+import java.lang.IllegalStateException
 
 fun TestVariant.extractTestApplication() = executeGradleCompat(
     exec = {
         extractTestApplication3_6_plus(this)
     },
-    fallbacks = listOf(
-        {
-            extractTestApplication3_3_to_3_5(this)
-        },
-        {
-            extractTestApplicationBefore3_3(this)
-        }
-    )
+    fallbacks = listOf {
+        extractTestApplicationBefore3_3(this)
+    }
 )
 
 fun extractTestApplication3_6_plus(variant: TestVariant): File {
@@ -60,30 +56,4 @@ private fun extractTestApplicationBefore3_3(variant: TestVariant): File {
             }
         }
     )
-}
-
-private fun extractTestApplication3_3_to_3_5(output: TestVariant): File {
-    val testPackageAndroidArtifact = when (output) {
-        is TestVariant -> {
-            output.packageApplicationProvider
-        }
-        is LibraryVariant -> {
-            output.packageLibraryProvider
-        }
-        else -> {
-            throw RuntimeException("Can't find test application provider. Output is ${output.javaClass.canonicalName}")
-        }
-    }.get()
-
-
-    return when (testPackageAndroidArtifact) {
-        is PackageAndroidArtifact -> {
-            assert(testPackageAndroidArtifact.apkNames.size == 1)
-            File(testPackageAndroidArtifact.outputDirectory.asFile.get(), testPackageAndroidArtifact.apkNames.first())
-        }
-        is Zip -> {
-            testPackageAndroidArtifact.destFile
-        }
-        else -> throw GradleException("Unknown artifact package type")
-    }
 }

@@ -15,7 +15,7 @@ class AndroidTestParser : TestParser {
         val tests = DexParser.findTestMethods(androidConfiguration.testApplicationOutput.absolutePath)
         return tests.map {
             val testName = it.testName
-            val annotations = it.annotations.map { it.toMetaProperty() }
+            val annotations = it.annotations.map(TestAnnotation::toMetaProperty)
             val split = testName.split("#")
 
             if (split.size != 2) throw IllegalStateException("Can't parse test $testName")
@@ -34,8 +34,7 @@ class AndroidTestParser : TestParser {
 
 private fun TestAnnotation.toMetaProperty(): MetaProperty {
     val metaMap = values.mapValues {
-        val value = it.value
-        val realValue = when (value) {
+        val realValue = when (val value = it.value) {
             is DecodedValue.DecodedString -> value.value
             is DecodedValue.DecodedByte -> value.value
             is DecodedValue.DecodedShort -> value.value
@@ -48,6 +47,7 @@ private fun TestAnnotation.toMetaProperty(): MetaProperty {
             DecodedValue.DecodedNull -> null
             is DecodedValue.DecodedBoolean -> value.value
             is DecodedValue.DecodedEnum -> value.value
+            is DecodedValue.DecodedArrayValue -> value.values
         }
         realValue
     }
